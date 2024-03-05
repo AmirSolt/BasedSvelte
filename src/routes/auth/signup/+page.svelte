@@ -1,6 +1,11 @@
+
+
+
+
+
 <div class="card">
-	<h1>Login</h1>
-	<form method="POST" action="?/login" class="flex flex-col justify-center items-start gap-4 w-full pt-4">
+	<h1>Sign up</h1>
+	<form method="POST" action="?/signup" class="flex flex-col justify-center items-start gap-4 w-full pt-4">
 		
 
         <label class="label" for="email">
@@ -22,7 +27,7 @@
                 class="input" 
                 type="password" 
                 name="password" 
-                autocomplete="current-password" />
+                autocomplete="new-password" />
         </label>
 
 		<button class="btn variant-filled" type="submit">Submit</button>	
@@ -32,16 +37,7 @@
 
 <br>
 
-<div class="flex flex-col justify-center items-center">
-	<p class="text-center">
-		Forgot password?
-		<a href="/auth/resetPassword/init" class="underline">Reset Password</a>
-	</p>
-
-	<p class="text-center">Or</p>
-
-	<p class="text-center">
-		Don't have an account?
-		<a href="/auth/signup" class="underline">Sign up</a>
-	</p>
-</div>
+<p class="text-center">
+	Have an account?
+	<a href="/auth/login" class="underline ">Sign in</a>
+</p>

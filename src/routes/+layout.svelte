@@ -2,6 +2,9 @@
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 
+	export let data;
+	let {user} = data;
+
 	// Highlight JS
 	import hljs from 'highlight.js/lib/core';
 	import 'highlight.js/styles/github-dark.css';
@@ -32,30 +35,41 @@
 				<strong class="text-xl uppercase">Skeleton</strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
+
+				{#if user}
+					<a
+						class="btn btn-sm variant-ghost-surface"
+						href="/user"
+					>
+						User
+					</a>
+					<a
+						class="btn btn-sm variant-ghost-surface"
+						href="/user/wallet"
+					>
+						Wallet
+					</a>
+					<a
+						class="btn btn-sm variant-ghost-surface"
+						href="/auth/logout"
+					>
+						Logout
+					</a>
+				{:else}
+
 				<a
 					class="btn btn-sm variant-ghost-surface"
-					href="https://discord.gg/EXqV7W8MtY"
-					target="_blank"
-					rel="noreferrer"
+					href="/auth/login"
 				>
-					Discord
+					Login
 				</a>
 				<a
 					class="btn btn-sm variant-ghost-surface"
-					href="https://twitter.com/SkeletonUI"
-					target="_blank"
-					rel="noreferrer"
+					href="/auth/signup"
 				>
-					Twitter
+					Signup
 				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://github.com/skeletonlabs/skeleton"
-					target="_blank"
-					rel="noreferrer"
-				>
-					GitHub
-				</a>
+				{/if}
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>

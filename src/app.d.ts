@@ -1,11 +1,10 @@
-// See https://kit.svelte.dev/docs/types#app
-// for information about these interfaces
-// and what to do when importing types
+import { PocketBase, AuthModel } from 'pocketbase';
+
 declare namespace App {
   // interface Error {}
   interface Locals {
-    pb: import('pocketbase').default
-    user: import('pocketbase').default['authStore']['model']
+    pb: PocketBase
+    user: User | undefined
   }
   // interface PageData {}
   // interface Platform {}

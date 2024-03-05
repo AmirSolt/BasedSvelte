@@ -1,20 +1,16 @@
 <script lang="ts">
 
     export let data;
-    let {userData, customerData} = data;
+    let {user, customer} = data;
 
 </script>
 
-<svelte:head>
-    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
 
 
-</svelte:head>
-
-userData {JSON.stringify(userData)}
+userData {JSON.stringify(user)}
 <br>
 <br>
 <br>
 <br>
-customerData {JSON.stringify(customerData)}
+customerData {JSON.stringify(customer)}
 

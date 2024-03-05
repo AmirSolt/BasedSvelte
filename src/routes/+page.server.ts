@@ -1,19 +1,22 @@
-import { pb } from "$lib/server/services/pocketbase"
 
 
 
-export const load = async () => {
+export const load = async ({locals}) => {
 
-
-    const userData = await pb.collection('users').authWithPassword<User>('killop1997@gmail.com', ']f1K;7xJ^]75');
-    const customersData = await pb.collection('customers').getFullList<Customer[]>({
-        filter: `user="${userData.record.id}"`
-    })
+    let customer:Customer|null  = null
+    if ( locals.user != null ) {
+        const customers = await locals.pb.collection('customers').getFullList({
+            filter: `user="${locals.user.id}"`
+        }) as Customer[]
+        if(customers.length>0){
+            customer = customers[0]
+        }
+    }
 
 
     return {
-        userData,
-        customerData:customersData[0]
+        user: locals.user,
+        customer
     }
 
 };

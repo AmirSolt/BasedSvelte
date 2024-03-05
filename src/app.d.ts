@@ -4,7 +4,7 @@ declare namespace App {
   // interface Error {}
   interface Locals {
     pb: PocketBase
-    user: User | undefined
+    user: User | null
   }
   // interface PageData {}
   // interface Platform {}

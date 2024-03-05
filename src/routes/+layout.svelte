@@ -39,12 +39,6 @@
 				{#if user}
 					<a
 						class="btn btn-sm variant-ghost-surface"
-						href="/user"
-					>
-						User
-					</a>
-					<a
-						class="btn btn-sm variant-ghost-surface"
 						href="/user/wallet"
 					>
 						Wallet
@@ -56,7 +50,12 @@
 						Logout
 					</a>
 				{:else}
-
+				<a
+				class="btn btn-sm variant-ghost-surface"
+				href="/payment/pricing"
+				>
+					Pricing
+				</a>
 				<a
 					class="btn btn-sm variant-ghost-surface"
 					href="/auth/login"

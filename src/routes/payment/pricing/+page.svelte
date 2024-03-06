@@ -14,8 +14,8 @@
 	<stripe-pricing-table
 		pricing-table-id={PUBLIC_STRIPE_PRICING_TABLE}
 		publishable-key={PUBLIC_STRIPE_KEY}
-		customer-email={customer.email}
-		customer-session-client-secret={customerSession.clientSecret}
+		customer-email={customer?.email}
+		customer-session-client-secret={customerSession?.clientSecret}
 	>
 	</stripe-pricing-table>
 </div>

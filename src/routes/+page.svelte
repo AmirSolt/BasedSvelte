@@ -1,16 +1,6 @@
 <script lang="ts">
-
-    export let data;
-    let {user, customer} = data;
-
+	export let data;
+	let { user } = data;
 </script>
 
-
-
 userData {JSON.stringify(user)}
-<br>
-<br>
-<br>
-<br>
-customerData {JSON.stringify(customer)}
-

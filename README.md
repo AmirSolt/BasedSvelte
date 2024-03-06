@@ -17,3 +17,11 @@ https://docs.stripe.com/payments/checkout/pricing-table?client=html#price-locali
 
 Portal session:
 https://docs.stripe.com/api/customer_portal/sessions/create
+
+
+
+
+=======================
+
+Auth
+- Auth has no email verification on sign-up or login. They can be added later if needed.

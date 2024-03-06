@@ -3,7 +3,7 @@
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 
 	export let data;
-	let {user} = data;
+	let { user } = data;
 
 	// Highlight JS
 	import hljs from 'highlight.js/lib/core';
@@ -35,39 +35,22 @@
 				<strong class="text-xl uppercase">Skeleton</strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-
 				{#if user}
-					<a
-						class="btn btn-sm variant-ghost-surface"
-						href="/user/wallet"
-					>
-						Wallet
-					</a>
-					<a
+					<a class="btn btn-sm variant-ghost-surface" href="/user/wallet"> Wallet </a>
+
+					<form action="/auth/logout" method="post">
+						<button type="submit" class="btn btn-sm variant-ghost-surface"> Logout </button>
+					</form>
+					<!-- <a
 						class="btn btn-sm variant-ghost-surface"
 						href="/auth/logout"
 					>
 						Logout
-					</a>
+					</a> -->
 				{:else}
-				<a
-				class="btn btn-sm variant-ghost-surface"
-				href="/payment/pricing"
-				>
-					Pricing
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="/auth/login"
-				>
-					Login
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="/auth/signup"
-				>
-					Signup
-				</a>
+					<a class="btn btn-sm variant-ghost-surface" href="/payment/pricing"> Pricing </a>
+					<a class="btn btn-sm variant-ghost-surface" href="/auth/login"> Login </a>
+					<a class="btn btn-sm variant-ghost-surface" href="/auth/signup"> Signup </a>
 				{/if}
 			</svelte:fragment>
 		</AppBar>

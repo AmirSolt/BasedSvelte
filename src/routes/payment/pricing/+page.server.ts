@@ -1,5 +1,6 @@
 
 import { stripe } from "$lib/stripe.server";
+import type Stripe from "stripe";
 
 export const load = async ({locals}) => {
   
@@ -13,8 +14,7 @@ export const load = async ({locals}) => {
       }
   }
 
-
-  let customerSession:CustomerSession|undefined
+  let customerSession:Stripe.CustomerSession|undefined
   if (customer != null) {
     customerSession = await stripe.customerSessions.create({
       customer: customer.stripe_customer_id,
@@ -25,6 +25,7 @@ export const load = async ({locals}) => {
       },
     });
   }
+  
   
   return {
     user:locals.user,

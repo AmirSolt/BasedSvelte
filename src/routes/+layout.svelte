@@ -37,6 +37,8 @@
 				</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
+				<a class="btn btn-sm variant-ghost-surface" href="/payment/pricing"> Pricing </a>
+
 				{#if user}
 					<a class="btn btn-sm variant-ghost-surface" href="/payment/wallet"> Wallet </a>
 
@@ -50,7 +52,6 @@
 						Logout
 					</a> -->
 				{:else}
-					<a class="btn btn-sm variant-ghost-surface" href="/payment/pricing"> Pricing </a>
 					<a
 						class="btn btn-sm variant-ghost-surface"
 						href={`/auth/login?dest=${$page.url.searchParams.get('dest')}`}

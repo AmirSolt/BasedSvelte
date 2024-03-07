@@ -11,14 +11,13 @@ export const load = async ({locals}) => {
     throw redirect(302, "/")
   }
   
-  let customer:Customer|undefined
-  const customers = await locals.pb.collection('customers').getFullList({
-      filter: `user="${locals.user.id}"`
-  }) as Customer[]
-  if(customers.length>0){
-      customer = customers[0]
-  }
 
+  let customer:Customer|undefined|null
+  try{
+    customer = await locals.pb.collection('customers').getFirstListItem(`user.id="${locals.user.id}"`);
+  } catch(e){
+    console.log("customer error: ",e)
+  }
 
 
   let session:Stripe.BillingPortal.Session|undefined

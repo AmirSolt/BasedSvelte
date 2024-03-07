@@ -49,11 +49,10 @@ export const actions = {
         console.log(responseLogin)
 
 		const dest = data.get('dest');
-		if (dest!=null && dest.toString().length > 0){
+		if (dest!=null && dest!="null" && dest.toString().length > 0){
 			console.log(" >>>>> ",decodeURIComponent(dest.toString()))
 			throw redirect(302, decodeURIComponent(dest.toString()))
 		}
-
 
 		throw redirect(302, "/")
 	},

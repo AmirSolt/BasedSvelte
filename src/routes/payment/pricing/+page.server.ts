@@ -23,13 +23,13 @@ const CheckoutRequestSchema = z.object({
 });
 
 export const actions = {
-  checkout: async ({ locals, request, url }) => {
+  subscribe: async ({ locals, request, url }) => {
     if ( locals.user == null ) {
       throw error(403, {message:"Unauthorized"})
     }
 
     const data = await request.formData();
-    const priceID = data.get('priceID');
+    const priceID = data.get('priceID') as string;
 
     // validation
     const validationResponse = CheckoutRequestSchema.safeParse({
@@ -42,37 +42,78 @@ export const actions = {
     }
 
 
-  let customer:Customer|undefined
-  if ( locals.user != null ) {
-      const customers = await locals.pb.collection('customers').getFullList({
-          filter: `user="${locals.user.id}"`
-      }) as Customer[]
-      if(customers.length>0){
-          customer = customers[0]
-      }
+    let customer:Customer|undefined|null
+    try{
+      customer = await locals.pb.collection('customers').getFirstListItem(`user.id="${locals.user.id}"`);
+    } catch(e){
+      console.log("customer error: ",e)
+    }
+  
+
+  if(customer==null || customer.stripe_subscription_id==null || customer.stripe_subscription_id==""){
+    console.log(">>> checkout")
+    await checkout(priceID, customer, locals.user)
+  } else {
+    console.log(">>> subsc update")
+    await updatePrice(priceID, customer, locals.user)
   }
 
-
-    const checkoutSession = await stripe.checkout.sessions.create({
-        line_items: [
-          {
-            price:priceID?.toString(),
-            quantity: 1,
-          },
-        ],
-        mode: 'subscription',
-        success_url: `${PUBLIC_DOMAIN}/payment/success`,
-        cancel_url: `${PUBLIC_DOMAIN}/payment/pricing`,
-        customer:customer?.stripe_customer_id,
-        customer_email:locals.user.email,
-    });
-    if (checkoutSession.url==null) {
-        throw error(400, {
-            message: "Error: Could not create checkout",
-        })
-    }
-
-
-    throw redirect(302, checkoutSession.url)
   },
 };
+
+
+
+async function checkout(priceID:string, customer:Customer|null|undefined, user:User){
+
+  let customerID:string|undefined
+  let email:string|undefined
+  if (customer!=null){
+    customerID = customer.stripe_customer_id
+  } else {
+    email = user.email
+  }
+
+  const checkoutSession = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price:priceID,
+          quantity: 1,
+        },
+      ],
+      mode: 'subscription',
+      success_url: `${PUBLIC_DOMAIN}/payment/success`,
+      cancel_url: `${PUBLIC_DOMAIN}/payment/pricing`,
+      customer:customerID,
+      customer_email:email,
+  });
+  if (checkoutSession.url==null) {
+      throw error(400, {
+          message: "Error: Could not create checkout",
+      })
+  }
+
+  throw redirect(302, checkoutSession.url)
+}
+
+async function updatePrice(priceID:string, customer:Customer, user:User){
+
+  
+const subscription = await stripe.subscriptions.retrieve(
+  customer.stripe_subscription_id
+);
+
+
+  const newSubscription = await stripe.subscriptions.update(
+    customer.stripe_subscription_id,
+    {
+      items: [
+        {
+          id: subscription.items.data[0].id,
+          price: priceID,
+        },
+      ],
+    }
+  );
+
+  throw redirect(302, "/payment/wallet")
+}

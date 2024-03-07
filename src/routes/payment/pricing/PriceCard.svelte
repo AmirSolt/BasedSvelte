@@ -54,7 +54,7 @@
 				{#if user == null}
 					<a href={`/auth/signup?dest=${encodeURIComponent('/payment/pricing')}`}> Next </a>
 				{:else}
-					<form action="?/checkout" method="post">
+					<form action="?/subscribe" method="post">
 						<input type="hidden" name="priceID" value={price?.id} />
 						<button
 							class="btn text-lg md:text-2x w-24 {specialColor

@@ -9,11 +9,8 @@ Stripe Backend (pocketbase) notes:
 
 Stripe Frontend notes:
 
-Pricing table parameters:
-https://docs.stripe.com/payments/checkout/pricing-table?client=html
-
-Price localization:
-https://docs.stripe.com/payments/checkout/pricing-table?client=html#price-localization
+Enable Customer Portal:
+https://dashboard.stripe.com/test/settings/billing/portal
 
 Portal session:
 https://docs.stripe.com/api/customer_portal/sessions/create

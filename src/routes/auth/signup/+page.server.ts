@@ -14,7 +14,7 @@ export const load = async ({locals}) => {
 }
 
 export const actions = {
-    signup: async ({ locals, request }) => {
+    signup: async ({ locals, request, url }) => {
 		if ( locals.user != null ) {
 			throw error(403, {message:"You can not be logged in to use this route."})
 		}
@@ -47,6 +47,12 @@ export const actions = {
 		const responseLogin = await locals.pb.collection("users").authWithPassword(email, password) 
 		console.log("===== Login =====")
         console.log(responseLogin)
+
+		const dest = data.get('dest');
+		if (dest!=null && dest.toString().length > 0){
+			console.log(" >>>>> ",decodeURIComponent(dest.toString()))
+			throw redirect(302, decodeURIComponent(dest.toString()))
+		}
 
 
 		throw redirect(302, "/")

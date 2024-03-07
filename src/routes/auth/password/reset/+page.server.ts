@@ -26,6 +26,6 @@ export const actions = {
         console.log(response)
 
 
-		throw redirect(302, `/auth/resetpassword/reset/sent`)
+		throw redirect(302, `/auth/password/sent`)
 	},
 };

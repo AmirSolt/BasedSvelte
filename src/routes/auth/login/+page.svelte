@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { page } from '$app/stores';
+</script>
+
 <div class="card">
 	<h1>Login</h1>
 	<form
@@ -5,6 +9,8 @@
 		action="?/login"
 		class="flex flex-col justify-center items-start gap-4 w-full pt-4"
 	>
+		<input type="hidden" name="dest" value={$page.url.searchParams.get('dest')} />
+
 		<label class="label" for="email">
 			<span>Email</span>
 			<input
@@ -37,13 +43,14 @@
 <div class="flex flex-col justify-center items-center">
 	<p class="text-center">
 		Forgot password?
-		<a href="/auth/resetpassword/reset" class="underline">Reset Password</a>
+		<a href="/auth/password/reset" class="underline">Reset Password</a>
 	</p>
 
 	<p class="text-center">Or</p>
 
 	<p class="text-center">
 		Don't have an account?
-		<a href="/auth/signup" class="underline">Sign up</a>
+		<a href={`/auth/signup?dest=${$page.url.searchParams.get('dest')}`} class="underline">Sign up</a
+		>
 	</p>
 </div>

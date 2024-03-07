@@ -24,6 +24,7 @@ export const actions = {
 		const data = await request.formData();
 		const email = data.get('email');
 		const password = data.get('password');
+		
 
 		// validation
 		const validationResponse = LoginSchema.safeParse({
@@ -40,6 +41,13 @@ export const actions = {
 
 		console.log("===== Login =====")
         console.log(response)
+
+
+		const dest = data.get('dest');
+		if (dest!=null && dest.toString().length > 0){
+			console.log(" >>>>> ",decodeURIComponent(dest.toString()))
+			throw redirect(302, decodeURIComponent(dest.toString()))
+		}
 
 		throw redirect(302, "/")
 	},

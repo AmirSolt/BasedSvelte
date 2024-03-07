@@ -2,7 +2,7 @@
 	import { MailCheck } from 'lucide-svelte';
 </script>
 
-<div class="card-mod">
+<div class="card">
 	<MailCheck color="#15CE48" size={100} />
 
 	<h1>Check your email</h1>

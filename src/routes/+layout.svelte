@@ -5,6 +5,17 @@
 	export let data;
 	let { user } = data;
 
+	// Error toast
+	import { Toast, initializeToastStore, getToastStore } from '@skeletonlabs/skeleton';
+	initializeToastStore();
+
+	$: if ($page.error != null) {
+		getToastStore().trigger({
+			message: $page.error.message,
+			background: 'variant-filled-error'
+		});
+	}
+
 	// // Highlight JS
 	// import hljs from 'highlight.js/lib/core';
 	// import 'highlight.js/styles/github-dark.css';
@@ -25,6 +36,8 @@
 	// import { storePopup } from '@skeletonlabs/skeleton';
 	// storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
+
+<Toast position="t" />
 
 <!-- App Shell -->
 <AppShell>

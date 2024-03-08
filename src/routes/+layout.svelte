@@ -6,8 +6,8 @@
 	let { user } = data;
 
 	// Error toast
-	import { Toast, initializeToastStore, getToastStore } from '@skeletonlabs/skeleton';
-	initializeToastStore();
+	import { Toast, initializeStores, getToastStore } from '@skeletonlabs/skeleton';
+	initializeStores();
 
 	$: if ($page.error != null) {
 		getToastStore().trigger({

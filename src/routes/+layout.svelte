@@ -11,7 +11,7 @@
 
 	$: if ($page.error != null) {
 		getToastStore().trigger({
-			message: `Error: ${$page.error.message}\n eventID: ${$page.error.eventID}`,
+			message: `Error: ${$page.error.message}`,
 			background: 'variant-filled-error'
 		});
 	}

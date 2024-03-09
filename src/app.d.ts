@@ -11,7 +11,6 @@ declare global {
     }
     interface Error {
 			message: string;
-			eventID: string;
 		}
     // interface PageData {}
     // interface Platform {}

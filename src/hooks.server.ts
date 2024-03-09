@@ -26,3 +26,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   return response
 }
+
+export async function handleError({ error, event, status, message }) {
+	// const eventID = Sentry.captureException(error, {
+	// 	extra: { event, status }
+	// });
+
+	return {
+		message,
+		eventID: "(emoty)",
+	};
+}

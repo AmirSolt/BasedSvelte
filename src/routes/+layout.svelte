@@ -46,7 +46,7 @@
 		<AppBar>
 			<svelte:fragment slot="lead">
 				<a href="/">
-					<strong class="text-xl uppercase">Skeleton</strong>
+					<strong class="text-xl uppercase">BasedPocket</strong>
 				</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
@@ -81,6 +81,20 @@
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
+
 	<!-- Page Route Content -->
-	<slot />
+	<div class="flex justify-center items-center m-4">
+		<div>
+			<slot />
+		</div>
+	</div>
+	<svelte:fragment slot="footer">
+		<hr />
+		<div class="flex flex-col justify-center items-end m-4">
+			<a href="/" class="flex justify-center items-center">
+				<img src="logo.png" alt="Logo" class="w-12" />
+			</a>
+			<p>BasedPocket 2024</p>
+		</div>
+	</svelte:fragment>
 </AppShell>
